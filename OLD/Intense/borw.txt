@@ -1,0 +1,28 @@
+12
+781246352187
+
+#include <bits/stdc++.h> //longest increasing subsequence
+using namespace std;
+int n,i,a[201],mem[201][201][201];
+int m1,m2,m3;
+int lbw(int i, int w, int b){
+    if (mem[i][w][b] == 0) {
+    if (i == n+1) mem[i][w][b] = 0;
+    else{
+        m1 = lbw(i+1,w,b);
+        if (a[w] > a[i])
+            m2 = lbw(i+1,i,b) + 1;
+        if (a[b] < a[i])
+            m3 = lbw(i+1,w,i) + 1;
+        mem[i][w][b] = max(m1,max(m2,m3));
+    }
+    }
+    return mem[i][w][b];
+}
+
+int main(){
+    scanf("%d",&n);
+    for (i = 1; i <= n; i++)
+        scanf("%d",&a[i]);
+    printf("%d",lbw(1,0,0));//printf("%d",lis(0,0));
+}
