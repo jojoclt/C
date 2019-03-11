@@ -1,21 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 int q,i,n,t,cnt;
-set <int> s;
+vector <int> a;
+void insertionSort(std::vector<int> &vec) 
+{ 
+    for (auto it = vec.begin(); it != vec.end(); it++) 
+    {         
+        // Searching the upper bound, i.e., first  
+        // element greater than *it from beginning 
+        auto const insertion_point =  
+                std::upper_bound(vec.begin(), it, *it); 
+          
+        // Shifting the unsorted part 
+        std::rotate(insertion_point, it, it+1);         
+    } 
+} 
 int main(){
     ios::sync_with_stdio(0);
     cin >> q;
     while (q--){
-        s.clear();
+        a.clear()
         cin >> n;
         for (i = 0; i < n; i++){
             cnt = 0;
-            cin >> t;
-            auto it1 = s.find(-t);
-            if (it1 == s.end()) s.insert(-t);
-            auto it2 = s.lower_bound(-t);
-            for (auto it = s.begin(); it != it2; it++)cnt++;
-            cout << cnt << " ";
+            cin >> a[i];
+            insertionSort(a);
             
         }
     }
