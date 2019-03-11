@@ -22,8 +22,8 @@ int main(){
             m[t] = u+1;
         }
     }
-    for (i = 0; i < 30; i++)printf("m[%d] = %d\n",i,m[i]);
-    return 0;
+    for (i = 0; i < 5; i++)printf("m[%d] = %d\n",i,m[i]);
+    //  return 0;
     for (i = 0; i < n; i++){
         cin >> t1 >> t2;
         if (t1 > t2) t2 += cs;
