@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n,t,u,i,t1,t2,cs;
+int S,E;
 stack <int> st;
 unordered_map <int,set<int>> v;
 unordered_map <int,int> m;
@@ -10,19 +11,16 @@ int main(){
     cin >> c >> n;
     cs = c.length();
     c += c;
-    st.push(0);
-    while (!st.empty()){
-        t = st.top();
-        st.push(++i);
-        u = st.top();
-        if (!st.empty() && c[t] == '(' && c[u] == ')'){
-            v[t].insert(u);
-            st.pop();
-            st.pop();
-            m[t] = u+1;
+    for (i = 0; i < cs*2; i++){
+        if (c[i] == '('){
+            st.push(i);
+            S = i;
+        }
+        else if (c[i] == ')'){
+            
         }
     }
-    for (i = 0; i < 5; i++)printf("m[%d] = %d\n",i,m[i]);
+    // for (i = 0; i < 5; i++)printf("m[%d] = %d\n",i,m[i]);
     //  return 0;
     for (i = 0; i < n; i++){
         cin >> t1 >> t2;

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 struct node{
-    int x,c,p;
+    int x,cap,p;
     bool operator < (node t) const{
         return p > t.p;
     }
@@ -9,14 +9,24 @@ struct node{
 struct coor{
     int x,val;
 };
-int p[105],mem[105][10005];
+int p[1005];
+bool visit[1005][105];
 int V,E;
 int c,s,e;
 int i,j,t1,t2,t3,P;
-unordered_map <int,vector<coor>> v;
+bool flag;
+//unordered_map <int,vector<coor>> v;
 priority_queue <node> pq;
+vector <coor> v[1005];
+void Clear(){
+    flag = false;
+    fill(&visit[0][0],&visit[1004][104],false);
+    while (!pq.empty()) pq.pop();
+}
 int main(){
-    ios::sync_with_stdio(0);
+//    freopen("in.txt","r",stdin);
+//     freopen("out.txt","w",stdout);
+
     cin >> V >> E;
     for (i = 0; i < V; i++) cin >> p[i];
     for (i = 0; i < E; i++){
@@ -24,32 +34,32 @@ int main(){
         v[t1].push_back({t2,t3});
         v[t2].push_back({t1,t3});
     }
-    cin >> c >> s >> e;
-    fill(&mem[0][0],&mem[V][c],1e9);
-    mem[s][0] = 0;
-    pq.push({s,0,0});
-    while (!pq.empty()){
-        t = pq.top(); pq.pop();
-        if (t.x == e){
-            printf("%d",mem[t.x][t.c]);
-            return 0;
-        }
-        P = t.p;
-        for (i = t.c; i <= c; i++){
-            for (j = 0; j < v[t.x].size(); j++){
-                int xx = v[t.x][j].x;
-                int vv = v[t.x][j].val;
-                if (vv <= i && mem[xx][i-vv] > P){
-                    mem[xx][i-vv] = P;
-                    // printf("from %d to %d i = %d >= val %d P = %d\n",t.x,v[t.x][j].x,i,v[t.x][j].val,P);
-                    pq.push({xx,i-vv,mem[xx][i-vv]});
-                }
+    int QQQ;
+    cin >> QQQ;
+    while (QQQ--){
+        Clear();
+        cin >> c >> s >> e;
+        pq.push({s,0,0});
+        while (!pq.empty()){
+            t = pq.top(); pq.pop();
+            if (t.x == e){
+                printf("%d\n",t.p);
+                flag = true;
+                break;
             }
-            P += p[t.x];
+            if (visit[t.x][t.cap]) continue;
+            visit[t.x][t.cap] = true;
+            if (t.cap < c) pq.push({t.x,t.cap+1,t.p+p[t.x]});
+            for (int i = 0; i < v[t.x].size(); i++){
+                int xx = v[t.x][i].x;
+                int cc = t.cap-v[t.x][i].val;
+                if (cc >= 0) pq.push({xx,cc,t.p});
+            }
         }
+//        cout << QQQ<<endl;
+        if (!flag) cout << "impossible\n";
     }
-    cout << -99;
-    return 0;
+    //return 0;
 }
 /*
 5 5
