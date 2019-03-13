@@ -45,7 +45,9 @@ int main(){
             int xx = t.x+item[i].x;
             int yy = t.y+item[i].y;
             int zz = t.z+item[i].z;
-            q.push({xx,yy,zz,i,1<<i|t.visit,t.d+dist[t.from][i]});
+            int vv = 1<<i|t.visit;
+            int dd = t.d+dist[t.from][i];
+            q.push({xx,yy,zz,i,vv,dd});
             // printf("x = %d y = %d z = %d ",xx,yy,zz);
             // printf("dist = %d\n",t.d+dist[t.from][i]);
         }
