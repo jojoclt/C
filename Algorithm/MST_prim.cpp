@@ -22,7 +22,7 @@ int main(){
 	q.push({0,0});
 	while(!q.empty()){
 		t = q.top(); q.pop();
-		//if (visit[t.x]) continue;
+		// if (visit[t.x]) continue;
 		visit[t.x] = true;
 		for (i = 0; i < v[t.x].size(); i++){
 			if(!visit[v[t.x][i].x]) q.push({v[t.x][i].x,v[t.x][i].val});
