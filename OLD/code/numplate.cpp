@@ -97,7 +97,7 @@ int main(){
         // cout << cnt;
         for (i = 0; i < n*n; i++)
             scanf(" %c",&c[i]);
-        printf("ANS >> %d\n",m[c]-1);
+        printf("%d\n",m[c]-1);
     }
 }
 
