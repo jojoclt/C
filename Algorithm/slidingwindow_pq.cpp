@@ -11,6 +11,6 @@ int main(){
     for (i = 0; i < n; i++){
         window.push(make_pair(-a[i],i));
         while (window.top().second <= i-k) window.pop();
-        cout << (-window.top().first) << ' ';
+        if (i >= k-1) cout << (-window.top().first) << ' ';
     }
 }

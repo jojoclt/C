@@ -3,6 +3,7 @@ using namespace std;
 char c[12];
 string t,tmp;
 int a,n,i,j,k;
+int cnt;
 queue <string> q;
 map <string,int> m;
 void f(int c,int d[]){
@@ -33,6 +34,7 @@ int main(){
         }
 
         while (!q.empty()){
+            // cnt++;
             t = q.front(); q.pop();
             tmp = t;
             if (n == 2){
@@ -92,6 +94,7 @@ int main(){
                 }
             }
         }
+        // cout << cnt;
         for (i = 0; i < n*n; i++)
             scanf(" %c",&c[i]);
         printf("ANS >> %d\n",m[c]-1);
