@@ -1,4 +1,3 @@
-Source #658426:
 #include <bits/stdc++.h>
 using namespace std;
 struct node {

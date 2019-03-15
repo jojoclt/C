@@ -1,30 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n;
-int i,t,t1,t2;
-int elo=1e9,epos,olo=1e9,opos;
-char c1,c2;
-int a[26];
-int visit[26];
-unordered_map <int,vector<int>> v;
-queue <int> q;
+int i,t;
+char t1,t2;
+vector <int> v[200];
+int c[200];
+bool visit[200][200],OK;
+int a1 = 1e9;
+void f(char c, string s){
+    if (OK) return;
+    if (s.length() == n+1 && !OK){
+        for (int i = 0; i < s.length(); i++) printf("%c ",s[i]);
+        OK = true;
+        return;
+    }
+    for (int i = 0; i < v[c].size(); i++){
+        int cc = v[c][i];
+        if (visit[c][cc]) continue;
+        visit[c][cc] = visit[cc][c] = true;
+        f(cc,s+string(1,cc));
+        visit[c][cc] = visit[cc][c] = false;
+    }
+    return ;
+}
 int main(){
     scanf("%d",&n);
     for (i = 0; i < n; i++){
-        scanf(" %c %c",&c1,&c2);
-        t1 = c1-'A'; t2 = c2-'A';
-        a[t1]++,a[t2]++;
+        scanf(" %c %c",&t1,&t2);
+        c[t1]++; c[t2]++;
         v[t1].push_back(t2);
         v[t2].push_back(t1);
     }
-    for (i = 0; i < 26; i++){
-        if (a[i]%2 && olo > a[i]) olo = a[i], opos = i;
-        else if (!(a[i]%2) && elo > a[i]) elo = a[i], epos = i;
+    for (i = 'A'; i <= 'Z'; i++){
+        if (c[i] % 2) if (a1 > c[i]) a1 = c[i], t1 = i;
     }
-    if (olo == 1e9) q.push(epos);
-    else if (elo == 1e9) q.push(opos);
-    else q.push(olo>elo?opos:epos);
-    while (!q.empty()){
-        t = q.front(); q.pop();
-    }
+    f(t1,string(1,t1));
 }
+/*
+6
+AB
+AE
+BD
+BC
+CE
+DE
+*/

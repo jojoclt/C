@@ -12,14 +12,12 @@ int main(){
     for (i = 1; i <= n; i++){
         if (!a[i]){
             for (j = 1; j <= n; j++) if (i != j) v.push_back(j);
-            printf("%d ",i);
-            for (auto c : v) printf("%d ",c);
-            printf("\n");
-            while (next_permutation(v.begin(),v.end())){
+            do {
                 printf("%d ",i);
                 for (auto c : v) printf("%d ",c);
                 printf("\n");
-            }
+            } while (next_permutation(v.begin(),v.end()));
+            
             v.clear();
         }
     }
