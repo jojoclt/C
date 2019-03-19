@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+<<<<<<< HEAD
 int T,i,j;
 int m,c,s[25],g[25][25];
 int mem[205][25];
@@ -24,5 +25,12 @@ int main(){
         int c = wedding(m,0);
         if (c >= 0) printf("%d\n",c);
         else printf("no solution\n");
+=======
+int T;
+int main(){
+    scanf("%d",&T);
+    while (T--){
+        
+>>>>>>> 47bab24e380e89bfd4aef58cc12549101566838e
     }
 }
