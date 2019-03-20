@@ -1,0 +1,16 @@
+# Microsoft Visual C++ Auto-generanted files and folders #
+##########################################################
+ReleaseDummy/
+Release/
+Debug/
+ipch/
+_UpgradeReport_Files/
+obj/
+*.user
+*.opensdf
+*.sdf
+*.exp
+*.lib
+*.obj
+*.tlog
+*.suo
