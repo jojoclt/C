@@ -31,8 +31,6 @@ int main(){
         pq.push({t1,t2,t3});
         s.insert(t3);
     }
-    l = 0; r = s.size(); mid = 0;
-    do{
-        if 
-    } while(l <= r)
+    l = 0; r = s.size(); mid = 1;
+    printf("%d",mid);
 }
