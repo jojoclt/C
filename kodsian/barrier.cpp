@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using ll = long long;
 using namespace std;
-int n,w,i,t1,t2;
+int n,w,i;
 const int MAXN = 6000005;
 int a[MAXN];
 struct Node{
@@ -9,7 +9,7 @@ struct Node{
     int l,r,len;
     Node(){
         sum = 0;
-        maxleftsum = maxrightsum = maxsum = LLONG_MIN;
+        maxleftsum = maxrightsum = maxsum = -3e13;
         l = r = len = 1;
     }
 
@@ -17,6 +17,7 @@ struct Node{
 int f(int x){
     return 1 << (int)(ceil(log2(n)) - floor(log2(x)));
 }
+int W; ll val;
 Node Merge(Node l, Node r, int x){
     Node p;
     p.sum = l.sum + r.sum;
@@ -66,6 +67,16 @@ int main(){
 //    return 0;
     for (i = 0; i < n-w+1; i++){
         res = query(1,0,n-1,i,i+w-1);
-        printf("%lld\n%d",res.maxsum,res.len);
+        if (val < res.maxsum){
+            val = res.maxsum;
+            W = res.len;
+        }
+        else if (val == res.maxsum){
+            if (W > res.len) W = res.len;
+        }
+    }
+    if (!val) printf("0\n0");
+    else {
+        printf("%lld\n%d",val,W);
     }
 }
