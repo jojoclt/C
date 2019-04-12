@@ -54,10 +54,4 @@ int main(){
         // cout << endl;
     }
     printf("%d",_max);
-    // return 0;
-    // for (i = 1; i <= m; i++){
-    //     for (j = 1; j <= n; j++){
-    //         printf("%d ",diag0[i][j]);
-    //     }cout<<endl;
-    // }
 }
