@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const int MAXN = 6e6+4;
+const int MAXN = 6e6+1;
 int i,t;
 int n,w;
 
@@ -32,15 +32,15 @@ void add(int k, int x){
     }
 }
 
-ll query(int l, int r){
-    ll sum = 0;
+int query(int l, int r){
+    ll t1 = 0,t2 = 0;
     l += n; r += n;
     while (l <= r){
-        if (l % 2 == 1) sum = max(sum,tree[l++].maxsum);
-        if (r % 2 == 0) sum = max(sum,tree[r--].maxsum);
+        if (l % 2 == 1) t1 = max(t1,tree[l++].maxsum);
+        if (r % 2 == 0) t2 = max(t2,tree[r--].maxsum);
         l /= 2; r /= 2;
     }
-    return sum;
+    return t1+t2;
 }
 int main(){
     scanf("%d%d",&n,&w);
@@ -48,29 +48,9 @@ int main(){
         scanf("%d",&t);
         add(i,t);
     }
-    // for (i = 1; i < 2*n; i++) printf("%lld ",tree[i].maxsum);
+    for (i = 1; i < 2*n; i++) printf("%lld ",tree[i].maxsum);
     // cout<<"\n\n";
-    for (i = 0; i < n-w+1; i++){
-        cout << query(i,i+w-1)<<" ";
-    }
+    // for (i = 0; i < n-w+1; i++){
+    //     cout << query(i,i+w-1)<<endl;
+    // }
 }
-
-/*
-7 4
-3
-2
-5
-1
-4
--7
-10
-
-7 3
-3
-2
-5
-1
-4
--7
-10
-*/

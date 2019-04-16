@@ -2,12 +2,12 @@
 using ll = long long;
 using namespace std;
 int n,w,i;
-int a[6005];
+int a[6000005];
 struct Node{
     ll sum, maxleftsum, maxrightsum, maxsum;
     int l,r,len;
 
-}tree[24005],res;
+}tree[24000005],res;
 int f(int x){
     return 1 << (int)(ceil(log2(n)) - floor(log2(x)));
 }
@@ -62,6 +62,8 @@ int main(){
 //    return 0;
     for (i = 0; i < n-w+1; i++){
         res = query(1,0,n-1,i,i+w-1);
+        cout << res.maxsum << " ";
+        continue;
         if (val < res.maxsum){
             val = res.maxsum;
             W = res.len;

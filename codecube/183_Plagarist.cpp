@@ -1,28 +1,31 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 int n,i,t;
 int tree[200005],a[200005];
-void update(int k, int x){
-    while (k <= n){
-        tree[k] += x;
-        k += k&-k;
-    }
+void update(int k){
+    for ( ; k <= n; k += k&-k) tree[k]--;
+}
+int sum(int k){
+    int sum = 0;
+    for (; k > 0; k -= k&-k) sum += tree[k];
+    return sum;
 }
 int query(int k){
-    int sum = 0;
-    while (k > 0){
-        sum += tree[k];
-        k -= k&-k;
+    int l = 1, r = n,mid;
+    while (l < r){
+        mid = l+r>>1;
+        if (sum(mid) >= k) r = mid;
+        else l = mid+1;
     }
-    return sum;
+    return l;
 }
 int main(){
     scanf("%d",&n);
-    for (i = 1; i <= n; i++) scanf("%d",&a[i]);
-        
+    for (i = 1; i <= n; i++) scanf("%d",&a[i]), tree[i] = i&-i;
     for (i = 1; i <= n; i++){
         scanf("%d",&t);
-        printf("%d\n",a[t+query(t)]);
-        update(t,1);
+        t = query(t);
+        printf("%d\n",a[t]);
+        update(t);
     }
 }
