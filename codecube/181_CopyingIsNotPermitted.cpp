@@ -4,7 +4,7 @@ struct node {
     int x,y,val;
 };
 int V,E,Q;
-int i,t1,t2,t3,cnt,l,r,mid;
+int i,t1,t2,t3,l,r,mid;
 int head[40005],v[40005][3];
 bool visit[40005];
 vector <node> q;
@@ -13,7 +13,6 @@ int h(int x){
     return head[x] = h(head[x]);
 }
 bool noCopy(int x){
-    cnt = 0;
     for (i = 1; i <= V; i++){
         head[i] = i;
     }
@@ -22,9 +21,8 @@ bool noCopy(int x){
         head[h(v[i][0])] = h(v[i][1]);
     }
     for (i = 0; i < Q; i++){
-        if (head[h(q[i].x)] == h(q[i].y)) cnt++;
+        if (head[h(q[i].x)] == h(q[i].y)) return 0;
     }
-    if (cnt) return 0;
     return 1;
 }
 int main(){
