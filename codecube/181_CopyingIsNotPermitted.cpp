@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 struct node {
-    int x,y,val;
+    int x,y;
 };
 int V,E,Q;
 int i,t1,t2,t3,l,r,mid;
