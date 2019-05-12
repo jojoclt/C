@@ -1,39 +1,63 @@
 #include <bits/stdc++.h>
 using namespace std;
-struct node{
-    long long x;
-    int pos;
+struct node {
+    int x,y;
     bool operator < (node t) const{
-        if (x != t.x) return x < t.x;
-        return pos < t.pos;
+        return x < t.x || ((x == t.x) && (y < t.y));
     }
 };
-int n,q,t;
-long long c;
-vector <node> v;
-int i;
-int search(int x){
-    int l = 0, r = n, mid;
+node a[100000];
+int tree[400000];
+int n,q,MIN = 1e9;
+int i,t,tmp;
+void add(int k, int x){
+    k += n;
+    tree[k] += x;
+    for (k /= 2; k >= 1; k /= 2){
+        tree[k] = max(tree[2*k],tree[2*k+1]);
+    }
+}
+int query(int l, int r){
+    l += n; r += n;
+    int s = INT_MIN;
     while (l <= r){
-        mid = l+r>>1;
-        if (v[mid].x >= x){
-            r = mid-1;
-        }
+        if (l % 2 == 1) s = max(s,tree[l++]);
+        if (r % 2 == 0) s = max(s,tree[r--]);
+        l /= 2; r /= 2;
+    }
+    return s;
+}
+int search(int key){
+    int l = 0,r = n-1,mid;
+    while (l <= r){
+        mid = (l+r)>>1;
+        // cout << a[mid].x << "x\n";
+        if (a[mid].x >= key) r = mid-1;
         else l = mid+1;
     }
-    if (v[mid].x < x) return v[mid].pos+1;
-    return v[mid].pos;
+    return mid;
 }
 int main(){
     scanf("%d%d",&n,&q);
     for (i = 0; i < n; i++){
         scanf("%d",&t);
-        c += t;
-        v.push_back({c,i});
+        tmp += t;
+        MIN = min(MIN,tmp);
+        a[i].x = tmp;
+        a[i].y = i+1;
     }
-    sort(v.begin(),v.end());
+    sort(a,a+n);
+    
+    for (i = 0; i < n; i++){
+        // cout << a[i].y<<endl;
+        add(i,a[i].y);
+    }
+   
     for (i = 0; i < q; i++){
         scanf("%d",&t);
-        printf("%d\n",search(t));
+        cout << a[search(t)].x<<endl;
+        continue;
+        if (t < MIN && 0) printf("0\n");
+        else printf("%d\n",query(0,search(t)));
     }
 }
