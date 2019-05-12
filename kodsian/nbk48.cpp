@@ -28,14 +28,15 @@ int query(int l, int r){
     return s;
 }
 int search(int key){
-    int l = 0,r = n-1,mid;
+    int l = 0,r = n-1,mid,t;
     while (l <= r){
         mid = (l+r)>>1;
         // cout << a[mid].x << "x\n";
-        if (a[mid].x >= key) r = mid-1;
-        else l = mid+1;
+        if (a[mid].x == key) return mid;
+        else if (a[mid].x >= key) r = mid-1;
+        else l = mid+1, t = l; //OR NO T BUT RETURN AS L OR R+1
     }
-    return mid;
+    return t-1;
 }
 int main(){
     scanf("%d%d",&n,&q);
@@ -49,15 +50,17 @@ int main(){
     sort(a,a+n);
     
     for (i = 0; i < n; i++){
-        // cout << a[i].y<<endl;
+        // printf("%d %d\n",a[i].x,a[i].y);
         add(i,a[i].y);
     }
-   
+    // while (scanf("%d",&t),t){
+    //     printf("%d\n",query(0,search(t)));
+    // }
     for (i = 0; i < q; i++){
         scanf("%d",&t);
-        cout << a[search(t)].x<<endl;
-        continue;
-        if (t < MIN && 0) printf("0\n");
+        // cout << a[search(t)].x<<endl;
+        // continue;
+        if (t < MIN) printf("0\n");
         else printf("%d\n",query(0,search(t)));
     }
 }
