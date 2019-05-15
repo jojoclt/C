@@ -11,9 +11,11 @@ int main(){
             high = t;
         }
         else{
+            // cout<<"P";
             int c = upper_bound(a,a+pos,t)-a;
             a[c] = t;
         }
     }
-    cout << n-pos;
+    for (i = 0; i < pos; i++) printf("%d ",a[i]);
+    // cout << n-pos;
 }

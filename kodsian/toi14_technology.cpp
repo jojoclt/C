@@ -2,6 +2,7 @@
 using namespace std;
 int n,hitech,lim;
 int i,j,k,t,p;
+int maxtech = -1;
 vector <int> tech[100005],v[100005];
 bool visit[100005];
 queue <int> q;
@@ -17,23 +18,27 @@ int main(){
             v[i].push_back(t);
         }
     }
-    for (j = 1; j <= hitech; j++){
+    for (j = 1; j <= hitech; maxtech = j++){
         // printf("%d\n",cnt);
         for (k = 0; k < (int)tech[j].size(); k++){
             if (visit[tech[j][k]]) continue;
             q.push(tech[j][k]);
-        }
-        while (!q.empty()){
-            t = q.front(); q.pop();
-           
-            if (visit[t]) continue;
-            visit[t] = true;
-            if (++cnt > lim){
-                printf("%d",j == 1 ? -1:j-1);
-                return 0;
-            }
-            for (i = 0; i < (int)v[t].size(); i++){
-                q.push(v[t][i]);
+            while (!q.empty()){
+                t = q.front(); q.pop();
+                // printf("%d\n",t);
+                if (t == tech[j][k] && visit[t]){
+                    printf("%d",maxtech);
+                    return 0;
+                }
+                if (visit[t]) continue;
+                visit[t] = true;
+                if (++cnt > lim){
+                    printf("%d",maxtech);
+                    return 0;
+                }
+                for (i = 0; i < (int)v[t].size(); i++)
+                    q.push(v[t][i]);
+                
             }
         }
     }

@@ -10,6 +10,7 @@ node a[100000];
 int _max[100000];
 int n,q,MIN = 1e9;
 int i,t,tmp;
+
 int search(int key){
     int l = 0,r = n-1,mid,t;
     while (l <= r){
@@ -31,19 +32,17 @@ int main(){
         a[i].y = i+1;
     }
     sort(a,a+n);
-    
-    for (i = 0; i < n; i++){
-        // printf("%d %d\n",a[i].x,a[i].y);
-        add(i,a[i].y);
+    _max[i] = a[i].y;
+    int curmax = a[i].y;
+    for (i = 1; i < n; i++){
+        curmax = max(curmax,a[i].y);
+        _max[i] = max(_max[i-1],curmax);
     }
-    // while (scanf("%d",&t),t){
-    //     printf("%d\n",query(0,search(t)));
-    // }
+    
     for (i = 0; i < q; i++){
         scanf("%d",&t);
-        // cout << a[search(t)].x<<endl;
-        // continue;
+        
         if (t < MIN) printf("0\n");
-        else printf("%d\n",query(0,search(t)));
+        else printf("%d\n",_max[search(t)]);
     }
 }
