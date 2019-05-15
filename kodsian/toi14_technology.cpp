@@ -3,7 +3,7 @@ using namespace std;
 int n,hitech,lim;
 int i,j,k,t,p;
 int maxtech = -1;
-vector <int> tech[100005],v[100005];
+vector <int> tech[10005],v[100005];
 bool visit[100005];
 queue <int> q;
 int _max,cnt;
