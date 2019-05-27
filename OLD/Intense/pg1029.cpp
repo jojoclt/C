@@ -27,14 +27,15 @@ int main(){
     a.push_back(1);
     a.push_back(n+1);
     sort(a.begin(),a.end());
+    
 //    for (i = 0; i < a.size(); i++)
 //        printf("%d ",i);printf("\n");
 //    for (i = 0; i < a.size(); i++){
 //        printf("%d ",a[i]);
 //    }printf("\n");
         for (i = 0; i < q; i++){
-            auto upper = upper_bound(a.begin(),a.end(),c[i]);
-            printf("%d\n",*upper-*(upper-1));//min that higher than key
+            int upper = upper_bound(a.begin(),a.end(),c[i])-a.begin();
+            printf("%d\n",a[upper]-a[upper-1]);//min that higher than key
 
 //            l = 0, r = a.size()-1;
 //            while (l <= r){
