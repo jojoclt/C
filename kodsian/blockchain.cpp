@@ -10,7 +10,7 @@ int main(){
         scanf("%d",&inp);
         for (j = 0; j < inp-1; j++){
             scanf("%d%d",&t1,&t2);
-            ans += t1+t2;
+            ans += (t1+t2)*(t1+t2);
         }
         s[inp].insert(ans);
     }
@@ -19,8 +19,15 @@ int main(){
         scanf("%d",&inp);
         for (j = 0; j < inp-1; j++){
             scanf("%d%d",&t1,&t2);
-            ans += t1+t2;
+            ans += (t1+t2)*(t1+t2);
         }
         printf("%d\n",s[inp].count(ans));
     }
 }
+// 1 2
+// 2 3
+// 3 4
+
+// 1 3
+// 2 4
+// 2 3
