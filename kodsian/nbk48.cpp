@@ -1,39 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
-struct node{
-    long long x;
-    int pos;
+struct node {
+    int x,y;
     bool operator < (node t) const{
-        if (x != t.x) return x < t.x;
-        return pos < t.pos;
+        return x < t.x || ((x == t.x) && (y > t.y));
     }
 };
-int n,q,t;
-long long c;
-vector <node> v;
-int i;
-int search(int x){
-    int l = 0, r = n, mid;
+node a[100000];
+int _max[100000];
+int n,q,MIN = 1e9;
+int i,t,tmp;
+int search(int key){
+    int l = 0,r = n-1,mid,t;
     while (l <= r){
-        mid = l+r>>1;
-        if (v[mid].x >= x){
-            r = mid-1;
-        }
-        else l = mid+1;
+        mid = (l+r)>>1;
+        // cout << a[mid].x << "x\n";
+        if (a[mid].x == key) return mid;
+        else if (a[mid].x >= key) r = mid-1;
+        else l = mid+1, t = l; //OR NO T BUT RETURN AS L OR R+1
     }
-    if (v[mid].x < x) return v[mid].pos+1;
-    return v[mid].pos;
+    return t-1;
 }
 int main(){
     scanf("%d%d",&n,&q);
     for (i = 0; i < n; i++){
         scanf("%d",&t);
-        c += t;
-        v.push_back({c,i});
+        tmp += t;
+        MIN = min(MIN,tmp);
+        a[i].x = tmp;
+        a[i].y = i+1;
     }
-    sort(v.begin(),v.end());
+    sort(a,a+n);
+    
+    for (i = 0; i < n; i++){
+        // printf("%d %d\n",a[i].x,a[i].y);
+        add(i,a[i].y);
+    }
+    // while (scanf("%d",&t),t){
+    //     printf("%d\n",query(0,search(t)));
+    // }
     for (i = 0; i < q; i++){
         scanf("%d",&t);
-        printf("%d\n",search(t));
+        // cout << a[search(t)].x<<endl;
+        // continue;
+        if (t < MIN) printf("0\n");
+        else printf("%d\n",query(0,search(t)));
     }
 }

@@ -1,1 +1,0 @@
-https://stackoverflow.com/questions/19524110/find-the-largest-sum-subarray-from-the-given-array-using-segment-trees
