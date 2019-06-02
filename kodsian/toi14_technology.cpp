@@ -2,11 +2,20 @@
 using namespace std;
 int n,hitech,lim;
 int i,j,k,t,p;
-int maxtech = -1;
+int cnt = 0,ans;
 vector <int> tech[10005],v[100005];
-bool visit[100005];
-queue <int> q;
-int _max,cnt;
+bool visit[100005],chk[100005];
+void dfs(int x){
+    if (visit[x]) return ;
+    if (chk[x]) {
+        cnt = 1e9;
+        return ;
+    }
+    chk[x] = true, ++cnt;
+    for (auto c : v[x]) dfs(c);
+    visit[x] = true;
+    return ;
+}
 int main(){
     scanf("%d%d%d",&n,&hitech,&lim);
     for (i = 1; i <= n; i++){
@@ -18,29 +27,12 @@ int main(){
             v[i].push_back(t);
         }
     }
-    for (j = 1; j <= hitech; maxtech = j++){
-        // printf("%d\n",cnt);
-        for (k = 0; k < (int)tech[j].size(); k++){
-            if (visit[tech[j][k]]) continue;
-            q.push(tech[j][k]);
-            while (!q.empty()){
-                t = q.front(); q.pop();
-                // printf("%d\n",t);
-                if (t == tech[j][k] && visit[t]){
-                    printf("%d",maxtech);
-                    return 0;
-                }
-                if (visit[t]) continue;
-                visit[t] = true;
-                if (++cnt > lim){
-                    printf("%d",maxtech);
-                    return 0;
-                }
-                for (i = 0; i < (int)v[t].size(); i++)
-                    q.push(v[t][i]);
-                
-            }
-        }
+    for (j = 1; j <= hitech; j++){
+        memset(chk,false,sizeof(chk));
+        for (k = 0; k < (int)tech[j].size(); k++) dfs(tech[j][k]);
+        if (cnt <= lim) ans = j;
+        else break;
     }
-    printf("%d",hitech);
+    if (ans) printf("%d",ans);
+    else printf("-1");
 }
