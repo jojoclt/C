@@ -2,7 +2,7 @@
 using namespace std;
 int n,i;
 string p,s;
-int b[500005];
+int b[5000005];
 void kmpPreprocess(){
     int i = 0, j = -1; b[0] = -1;
     while (i < n){

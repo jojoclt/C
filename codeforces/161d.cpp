@@ -1,18 +1,18 @@
 #include <bits/stdc++.h>
-#define clear(x,y) memset(x,y,sizeof(x));
 using namespace std;
-int n,k;
-int cnt;
-int i,t1,t2;
-bool visit[50005][500];
-int mem[50005][500];
+int i,n,k,ans;
+int t1,t2;
 vector <int> v[50005];
-int dfs(int x, int val){
-    if (visit[x][val]) return mem[x][val];
-    visit[x][val] = true;
-    if (val == k){ ++cnt; return;}
-    for (auto c : v[x]) dfs(c,val+1);
-    return ;
+int mem[50001][501];
+void dfs(int u, int last){
+    mem[u][0] = 1;
+    for (auto v : v[u]){
+        if (v == last) continue;
+        dfs(v,u);
+        for (int j = 1; j <= k; j++) ans += mem[u][j-1]*mem[v][k-j];
+        for (int j = 1; j <= k; j++) mem[u][j] += mem[v][j-1];
+        
+    }
 }
 int main(){
     scanf("%d%d",&n,&k);
@@ -21,6 +21,6 @@ int main(){
         v[t1].push_back(t2);
         v[t2].push_back(t1);
     }
-    for (i = 1; i <= n; i++){ clear(visit,0); dfs(i,0);}
-    printf("%d",cnt/2);
+    dfs(1,0);
+    printf("%d",ans);
 }

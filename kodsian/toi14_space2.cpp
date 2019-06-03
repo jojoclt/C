@@ -5,14 +5,14 @@ struct node{
 }t;
 int x[] = {1,0,-1,0};
 int y[] = {0,1,0,-1};
-bool a[2000][2000];
+bool a[1005][1005];
 int m,n;
 int i,j;
 int st,diag,tri;
 char c;
 queue <node> q;
 bool check(int x, int y){
-    if (x >= 0 && y >= 0 && x < 2000 && y < 2000) return 1;
+    if (x >= 0 && y >= 0 && x <= 1000 && y <= 1000) return 1;
     return 0;
 }
 int fun(int x){

@@ -6,8 +6,8 @@ struct node {
         return x < t.x || ((x == t.x) && (y > t.y));
     }
 };
-node a[100000];
-int _max[100000];
+node a[100005];
+int _max[100005];
 int n,q,MIN = 1e9;
 int i,t,tmp;
 
@@ -32,16 +32,13 @@ int main(){
         a[i].y = i+1;
     }
     sort(a,a+n);
-    _max[i] = a[i].y;
-    int curmax = a[i].y;
+    _max[0] = a[0].y;
     for (i = 1; i < n; i++){
-        curmax = max(curmax,a[i].y);
-        _max[i] = max(_max[i-1],curmax);
+        _max[i] = max(_max[i-1],a[i].y);
     }
     
     for (i = 0; i < q; i++){
         scanf("%d",&t);
-        
         if (t < MIN) printf("0\n");
         else printf("%d\n",_max[search(t)]);
     }
