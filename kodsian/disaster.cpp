@@ -18,7 +18,7 @@ void f(char c, string s){
         int cc = v[c][i];
         if (visit[c][cc]) continue;
         visit[c][cc] = visit[cc][c] = true;
-        f(cc,s+string(1,cc));
+        f(cc,s+(string(1,cc)));
         visit[c][cc] = visit[cc][c] = false;
     }
     return ;
